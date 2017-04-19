@@ -27,11 +27,11 @@ var assetsObj = {
     }
 }
 
-window.onload =function() {
+window.onload = function() {
     Crafty.init(640,640,document.getElementById("game"));
     Crafty.load(assetsObj, function(){
         Crafty.background('#000');
-        var board = new Board();
+        window.board = new Board();
         board.setPieces();
     });
 };

@@ -4,9 +4,12 @@
 function King(x, y, board, color) {
     Piece.call(this, x, y, board, color);
     
+    this.xOffset = -1;
+    this.yOffset = -3;
+    
     this.drawPiece = function() {
         this.element = Crafty.e("2D, Canvas, " + color + "_king")
-            .attr({x: x * board.square_size - 1, y: y * board.square_size - 3, w: board.square_size, h: board.square_size});
+            .attr({x: this.x * board.square_size + this.xOffset, y: this.y * board.square_size + this.yOffset, w: board.square_size, h: board.square_size});
     }
     
 }
