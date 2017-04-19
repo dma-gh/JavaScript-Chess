@@ -31,16 +31,16 @@ function Board() {
             if(y % 2 == 0) {
                 // y is even
                 if(x % 2 == 0) {
-                    color = "brown";
-                } else {
                     color = "lightgray";
+                } else {
+                    color = "brown";
                 }
             } else {
                 //y is odd
                 if(x % 2 == 0) {
-                    color = "lightgray";
-                } else {
                     color = "brown";
+                } else {
+                    color = "lightgray";
                 }
             }
 
