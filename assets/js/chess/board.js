@@ -24,40 +24,55 @@ function Board() {
     //Draw the board
     this.square_size = 80;
     this.last_clicked = null;
+    
+    this.get_square_color = function(x, y) {
+        var color;
+        
+        if(y % 2 == 0) {
+            // y is even
+            if(x % 2 == 0) {
+                color = "lightgray";
+            } else {
+                color = "brown";
+            }
+        } else {
+            //y is odd
+            if(x % 2 == 0) {
+                color = "brown";
+            } else {
+                color = "lightgray";
+            }
+        }
+        
+        return color;
+    };
+    
     var color;
     for(var x in this.board_array) {
         for(var y in this.board_array[x]) {
             
-            if(y % 2 == 0) {
-                // y is even
-                if(x % 2 == 0) {
-                    color = "lightgray";
-                } else {
-                    color = "brown";
-                }
-            } else {
-                //y is odd
-                if(x % 2 == 0) {
-                    color = "brown";
-                } else {
-                    color = "lightgray";
-                }
-            }
+            color = this.get_square_color(x,y);
 
             this.board_array[x][y].element = Crafty.e("2D, Canvas, Color, Mouse")
                 .color(color)
                 .attr({x: x * this.square_size, y: y * this.square_size, w: this.square_size, h: this.square_size})
                 .bind("Click", function(e) {
                     var board = window.board;
+                    var color;
                     
                     if(board.last_clicked == null) {
                         board.last_clicked = board.get_square(Math.floor(e.realX/80), Math.floor(e.realY/80));
-                        if(board.last_clicked.get_piece == null) {
+                        if(board.last_clicked.get_piece === undefined) {
                             board.last_clicked = null;
+                        } else {
+                            color = board.last_clicked.element.color;
+                            board.last_clicked.element.color("yellow");
                         }
                     } else {
                         var to_square = board.get_square(Math.floor(e.realX/80), Math.floor(e.realY/80));
                         var from_piece = board.last_clicked.get_piece();
+
+                        board.last_clicked.element.color(board.get_square_color(board.last_clicked.x, board.last_clicked.y));
                         board.last_clicked = null;
                         
                         from_piece.set_square(to_square.x,to_square.y);
@@ -106,5 +121,5 @@ function Board() {
         for(var x in this.pieces) {
             this.pieces[x].drawPiece();
         }
-    }
+    };
 }
