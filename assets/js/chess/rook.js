@@ -8,8 +8,8 @@ function Rook(x, y, board, color) {
     this.yOffset = -4;
     
     this.drawPiece = function() {
-        this.element = Crafty.e("2D, Canvas, " + color + "_rook")
-             .attr({x: this.x * board.square_size - 12, y: this.y * board.square_size - 4, w: board.square_size, h: board.square_size});
+        this.element = Crafty.e("2D, Canvas, Tween, " + color + "_rook")
+             .attr({x: this.x * board.square_size + this.xOffset, y: this.y * board.square_size + this.yOffset, w: board.square_size, h: board.square_size});
     }
     
 }

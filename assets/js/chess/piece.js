@@ -23,7 +23,6 @@ function Piece(x, y, board, color) {
         this.x = x;
         this.y = y;
         
-        this.element.x = x * window.board.square_size + this.xOffset;
-        this.element.y = y * window.board.square_size + this.yOffset;
+        this.element.tween({x: x * window.board.square_size + this.xOffset, y: y * window.board.square_size + this.yOffset}, 400);
     };
 }
