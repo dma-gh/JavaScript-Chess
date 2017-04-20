@@ -10,6 +10,7 @@
 function Board() {
     this.board_array = new Array(7);
     this.pieces = new Array();
+    this.turn_count = 0;
 
     for (var i = 0; i < 8; i++) {
         this.board_array[i] = new Array(7);
@@ -71,12 +72,18 @@ function Board() {
                     } else {
                         var to_square = board.get_square(Math.floor(e.realX/80), Math.floor(e.realY/80));
                         var from_piece = board.last_clicked.get_piece();
+                        var to_piece = to_square.get_piece();
 
                         board.last_clicked.element.color(board.get_square_color(board.last_clicked.x, board.last_clicked.y));
                         board.last_clicked = null;
                         
-                        from_piece.set_square(to_square.x,to_square.y);
+                        if(from_piece.can_move(to_square.x, to_square.y) && from_piece.is_turn()) {
+                            from_piece.set_square(to_square.x, to_square.y);
                         
+                            if(to_piece !== undefined) {
+                                to_piece.clear_piece();
+                            }
+                        }
                     }
                 });
         }

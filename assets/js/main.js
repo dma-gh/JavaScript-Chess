@@ -32,6 +32,6 @@ window.onload = function() {
     Crafty.load(assetsObj, function(){
         Crafty.background('#000');
         window.board = new Board();
-        board.setPieces();
+        window.board.setPieces();
     });
 };
